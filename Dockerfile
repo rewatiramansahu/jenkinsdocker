@@ -2,4 +2,4 @@
 FROM nginx:latest
 
 # Copy static files to the Nginx server
-COPY html/ /usr/share/nginx/html/
+COPY . /usr/share/nginx/html/
