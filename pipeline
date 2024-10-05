@@ -2,17 +2,14 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_USERNAME = 'your_dockerhub_username'  // Replace with your Docker Hub username
-        ENCRYPTED_PASSWORD = 'your_encrypted_password' // Use the encrypted password from Step 1
+            DOCKER_IMAGE = 'raghuopsdev/my-nginx-app' // Replace with your Docker Hub username and repository
     }
 
     stages {
-        stage('Checkout') {
+        stage('Clone Repository') {
             steps {
-                script {
-                    // Checkout the Git repository
-                    git branch: 'main', url: 'https://github.com/your-username/your-repo.git'
-                }
+                // Clone your repository containing the Dockerfile and HTML files
+                git branch: 'main', url: 'https://github.com/raghuopsdev/jenkinsdocker.git' // Replace with your repository URL
             }
         }
 
@@ -20,18 +17,18 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image
-                    sh "docker build -t your-dockerhub-username/my-image:latest ."
+                    sh 'docker build -t ${DOCKER_IMAGE}:latest .'
                 }
             }
         }
 
-        stage('Login to Docker Hub') {
+       stage('Set Permissions and Login to Docker Hub') {
             steps {
                 script {
                     // Provide executable permissions to the docker_login.sh script
                     sh "chmod +x ./docker_login.sh"
                     
-                    // Execute the Docker login script with encrypted password
+                    // Execute the Docker login script
                     sh "./docker_login.sh"
                 }
             }
@@ -41,7 +38,7 @@ pipeline {
             steps {
                 script {
                     // Push the Docker image to Docker Hub
-                    sh "docker push your-dockerhub-username/my-image:latest"
+                    sh "docker push ${DOCKER_IMAGE}:latest"
                 }
             }
         }
@@ -49,7 +46,7 @@ pipeline {
 
     post {
         success {
-            echo 'Docker image built and pushed successfully!'
+            echo 'Docker image built and pushed to Docker Hub successfully!'
         }
         failure {
             echo 'Pipeline failed!'
