@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Set your Docker Hub credentials
-DOCKER_USERNAME='raghuopsdev'   # Username passed as the first argument
-DOCKER_PASSWORD='test123test'   # Password passed as the second argument
+DOCKER_USERNAME='rewatiramansahu'   # Username passed as the first argument
+DOCKER_PASSWORD='Test@12345'   # Password passed as the second argument
 
 # Log in to Docker Hub
 echo "Logging in to Docker Hub..."
