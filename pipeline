@@ -1,0 +1,58 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_USERNAME = 'your_dockerhub_username'  // Replace with your Docker Hub username
+        ENCRYPTED_PASSWORD = 'your_encrypted_password' // Use the encrypted password from Step 1
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    // Checkout the Git repository
+                    git branch: 'main', url: 'https://github.com/your-username/your-repo.git'
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build the Docker image
+                    sh "docker build -t your-dockerhub-username/my-image:latest ."
+                }
+            }
+        }
+
+        stage('Login to Docker Hub') {
+            steps {
+                script {
+                    // Provide executable permissions to the docker_login.sh script
+                    sh "chmod +x ./docker_login.sh"
+                    
+                    // Execute the Docker login script with encrypted password
+                    sh "./docker_login.sh"
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    // Push the Docker image to Docker Hub
+                    sh "docker push your-dockerhub-username/my-image:latest"
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Docker image built and pushed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
