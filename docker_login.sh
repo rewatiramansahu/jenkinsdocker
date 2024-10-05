@@ -2,7 +2,7 @@
 
 # Set your Docker Hub credentials
 DOCKER_USERNAME='rewatiramansahu'   # Username passed as the first argument
-# DOCKER_PASSWORD='Test@12345'   # Password passed as the second argument
+DOCKER_PASSWORD='Test@12345'   # Password passed as the second argument
 SECRET_KEY="sahu" 
 ENCRYPTED_PASSWORD="U2FsdGVkX19mGSzJrQfOFL9lNtjuoJ3iOIaPeP/CZCk="
 
