@@ -2,14 +2,14 @@ pipeline {
     agent any
 
     environment {
-            DOCKER_IMAGE = 'raghuopsdev/my-nginx-app' // Replace with your Docker Hub username and repository
+            DOCKER_IMAGE = 'rewatiramansahu/my-nginx-app' // Replace with your Docker Hub username and repository
     }
 
     stages {
         stage('Clone Repository') {
             steps {
                 // Clone your repository containing the Dockerfile and HTML files
-                git branch: 'main', url: 'https://github.com/raghuopsdev/jenkinsdocker.git' // Replace with your repository URL
+                git branch: 'main', url: 'https://github.com/rewatiramansahu/jenkinsdocker.git' // Replace with your repository URL
             }
         }
 
@@ -39,6 +39,7 @@ pipeline {
                 script {
                     // Push the Docker image to Docker Hub
                     sh "docker push ${DOCKER_IMAGE}:latest"
+                    sh "docker run -d -p 8086:80 ${DOCKER_IMAGE}:latest"
                 }
             }
         }
