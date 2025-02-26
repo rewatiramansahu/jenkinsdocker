@@ -3,12 +3,12 @@
 # Set your Docker Hub credentials
 DOCKER_USERNAME='rewatiramansahu'   # Username passed as the first argument
 DOCKER_PASSWORD='Rewatiraman22!'   # Password passed as the second argument
-SECRET_KEY="sahu" 
-ENCRYPTED_PASSWORD="U2FsdGVkX18Y5f1IINMM3lb1yHWRbi3gSnTWVe3yP5U="
+#SECRET_KEY="sahu" 
+#ENCRYPTED_PASSWORD="U2FsdGVkX18Y5f1IINMM3lb1yHWRbi3gSnTWVe3yP5U="
 
 # Decrypt the Docker Hub password
 
-DOCKER_PASSWORD=$(echo "$ENCRYPTED_PASSWORD" | openssl enc -aes-256-cbc -d -a -pass pass:"$SECRET_KEY")
+#DOCKER_PASSWORD=$(echo "$ENCRYPTED_PASSWORD" | openssl enc -aes-256-cbc -d -a -pass pass:"$SECRET_KEY")
 
 # Log in to Docker Hub
 echo "Logging in to Docker Hub..."
