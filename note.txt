@@ -1,0 +1,20 @@
+Option 1: Add Jenkins User to the Docker Group
+
+Check if the docker group exists:
+
+cat /etc/group | grep docker
+
+If docker:x:999: appears, the docker group exists.
+
+Add Jenkins user to the docker group:
+
+sudo usermod -aG docker jenkins
+
+Restart Jenkins service to apply changes:
+
+sudo systemctl restart jenkins
+
+
+Log out and back in to apply group changes, or restart the machine:
+
+sudo reboot
